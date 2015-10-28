@@ -1,0 +1,21 @@
+<br>
+<h1>SOLVE THIS RIDDLE</h1>
+<div class='category'>
+	You chose:
+	<%= @puzzle.category %>
+</div>
+<br>
+<div class='puzzle'>
+	Figure it out!
+	<br>
+	<%= @puzzle.text %> ?
+</div>
+<br>
+<div class='answer-input'>
+	<%= form_for(@answer) do |f| %>
+	  	<span>
+	    	<%= f.text_field :text, placeholder: "Your answer goes here" %> 
+	  	</span>
+		<%= f.submit "Submit", class: "btn-submit" %>
+	<% end %>
+</div>
