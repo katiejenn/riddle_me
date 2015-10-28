@@ -36,31 +36,34 @@ class AnswersController < ApplicationController
 		#check each word in the array. If all the keywords were found in the user's answer, the answer is correct
 		def check_answer(answer, puzzle)
 
-			arr = answer.text.split(' ')
-			answer_words = {}
-			Keyword.where(puzzle_id: puzzle.id)
+			arr = answer.text.downcase.split(' ')
+			keyword_check = {}
+			keywords = Keyword.where(puzzle_id: puzzle.id)
 
 			#create a new hash that assigns each keyword as the key and value is initialized as false
-			arr.each do |x|
-				answer_words[x] = false
+			keywords.each do |x|
+				keyword_check[x.text] = false
 			end
 
 			#if a keyword is found in the answer, it's value is set to true
 			arr.each do |x|
-				if x.eql? puzzle.keywords
-					answer_words[x] = true
+				keywords.each do |y|
+					if x.eql? y.text
+						keyword_check[x] = true
+					end
 				end
 			end
+			# byebug
 
 			#check if all the values in the hash are true
 			all_values_true = true
-			answer_words do |x|
-				if answer_words[x] == false
+			keywords.each do |x|
+				if keyword_check[x.text] == false
 					all_values_true = false
 				end
 			end
 
-			#if all values are true, all the key
+			#if all the key values are true, all keywords have been matched
 			if all_values_true == true
 				return true
 			else
