@@ -29,9 +29,9 @@ gem 'pry-rails', :group => :development
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
-gem ‘thin'
-ruby ‘2.0.0'
-gem ‘unicorn’ (uncommented this  line)
+gem 'thin'
+ruby '2.0.0'
+
 group :production do
   gem 'rails_12factor'
 end
@@ -40,7 +40,7 @@ end
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
