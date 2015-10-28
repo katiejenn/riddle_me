@@ -29,6 +29,13 @@ gem 'pry-rails', :group => :development
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
+gem ‘thin'
+ruby ‘2.0.0'
+gem ‘unicorn’ (uncommented this  line)
+group :production do
+  gem 'rails_12factor'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
