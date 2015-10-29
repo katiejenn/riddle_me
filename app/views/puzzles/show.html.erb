@@ -15,7 +15,7 @@
 <div class='answer-input'>
 	<%= form_for [@puzzle, @answer] do |f| %>
 	  	<span>
-	    	<%= f.text_field :text, placeholder: "Your answer goes here" %> 
+	    	<%= f.text_field :text, placeholder: 'Your answer goes here', :autocomplete => :off %> 
 	  	</span>
 		<%= f.submit "Submit", class: "btn-submit" %>
 	<% end %>
