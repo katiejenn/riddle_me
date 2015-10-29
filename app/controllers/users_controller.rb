@@ -28,8 +28,8 @@ class UsersController < ApplicationController
 
   	def show
     	@user = User.find(params[:id])
-    	@solved_puzzles = @user.puzzles
-    	@answers = @user.answers
+    	@answers = Answer.where(user_id: @user.id)
+    	@puzzles = Puzzle.all
     	render :show
   	end
 end

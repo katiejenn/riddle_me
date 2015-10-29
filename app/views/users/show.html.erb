@@ -5,13 +5,13 @@
 <br>
 <h3>Solved riddles:</h3>
 <br>
-<% @solved_puzzles.each do |puzzle| %>
+<% @answers.each do |answer| %>
 	<b>Riddle:</b>
 	<br>
-	<%= puzzle.text %>
+	<%= answer.puzzle.text %>
 	<br>
 	<b>Answer:</b>
 	<br>
-	<%= @answers.where(puzzle_id: puzzle.id) %>
+	<%= answer.text %>
 	<br><br>
 <% end %>

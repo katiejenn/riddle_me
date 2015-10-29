@@ -31,6 +31,8 @@ class AnswersController < ApplicationController
 
 		if check_answer(@answer, @puzzle)
 			@message = "Congratulations! Your answer is correct!"
+			@answer.accepted = true
+			@answer.save
 			@answer_is_correct = true
 		else
 			@message = "Sorry, you were not correct."
