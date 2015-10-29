@@ -1,16 +1,20 @@
 <br>
-Your puzzle:
+<i>Your puzzle:</i>
 <div>
 	<%= @puzzle.text %>
 </div>
 <br>
-Your answer:
+<i>Your answer:</i>
 <div>
 	<%= @answer.text %>
 </div>
 
 <br>
-<%= @message %>
+<b><%= @message %></b>
+<br>
+<% if !@answer_is_correct then %>
+<a href='javascript:history.back()'> <%= @options[0]%> </a><%= @options[1] %>
+<% end %>
 <br>
 <br>
 <a href='/puzzles/<%= @puzzle.id %>/answers'>Click here</a>&nbsp;to view all the submitted answers for this question.

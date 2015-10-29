@@ -12,7 +12,8 @@ class AnswersController < ApplicationController
 
 	def create
 		@answer = Answer.new(answer_params)
-		@puzzle = Puzzle.find(params[:id])
+		@puzzle= Puzzle.find(params[:id])
+		@answer.puzzle_id = @puzzle.id
 
 		if @answer.save
 			redirect_to "/answers/#{@answer.id}?puzzle_id=#{@puzzle.id}"
@@ -28,8 +29,11 @@ class AnswersController < ApplicationController
 
 		if check_answer(@answer, @puzzle)
 			@message = "Congratulations! Your answer is correct!"
+			@answer_is_correct = true
 		else
 			@message = "Sorry, you were not correct."
+			@options = ['Click here ', 'to try again ', 'or ', 'Reveal the Answer!']
+			@answer_is_correct = false
 		end
 
 	end
