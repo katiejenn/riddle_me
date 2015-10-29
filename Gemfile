@@ -26,9 +26,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #gems KATIE added
 gem 'pry-rails', :group => :development
 
-gem 'bootstrap-sass', '~> 3.2.0'
-gem 'autoprefixer-rails'
-
 gem 'thin'
 ruby '2.0.0'
 
