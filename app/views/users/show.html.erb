@@ -1,7 +1,17 @@
 <br>
 <div>
-  Welcome, <%= @user.email %> 
+  <i>Welcome, <%= @user.email %></i> 
 </div>
-
-Solved riddles:
-<% %>
+<br>
+<h3>Solved riddles:</h3>
+<br>
+<% @solved_puzzles.each do |puzzle| %>
+	<b>Riddle:</b>
+	<br>
+	<%= puzzle.text %>
+	<br>
+	<b>Answer:</b>
+	<br>
+	<%= @answers.where(puzzle_id: puzzle.id) %>
+	<br><br>
+<% end %>

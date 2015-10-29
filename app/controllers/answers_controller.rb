@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
 	def index
 		@answers = Answer.where(puzzle_id: params[:id])
-		# byebug
+		@users = User.all
 
 	end
 
@@ -14,6 +14,8 @@ class AnswersController < ApplicationController
 		@answer = Answer.new(answer_params)
 		@puzzle= Puzzle.find(params[:id])
 		@answer.puzzle_id = @puzzle.id
+		current_user.answers << @answer
+		current_user.puzzles << @puzzle
 
 		if @answer.save
 			redirect_to "/answers/#{@answer.id}?puzzle_id=#{@puzzle.id}"

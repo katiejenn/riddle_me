@@ -1,7 +1,10 @@
 <br>
 <% @answers.each do |answer| %>
-	<%= answer.text %>
+	<% user = answer.user %>
+	<%= user.email %> said: 
 	<br>
+	'<%= answer.text %>'
+	<br><br>
 <% end %>
 
 
