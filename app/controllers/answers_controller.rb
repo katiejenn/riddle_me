@@ -14,8 +14,15 @@ class AnswersController < ApplicationController
 		@answer = Answer.new(answer_params)
 		@puzzle= Puzzle.find(params[:id])
 		@answer.puzzle_id = @puzzle.id
-		current_user.answers << @answer
-		current_user.puzzles << @puzzle
+		if current_user
+			current_user.answers << @answer
+			current_user.puzzles << @puzzle
+		else
+			guest_user = User.find(6)
+			guest_user.answers << @answer
+			guest_user.puzzles << @puzzle
+		end
+			
 
 		if @answer.save
 			redirect_to "/answers/#{@answer.id}?puzzle_id=#{@puzzle.id}"
@@ -28,6 +35,11 @@ class AnswersController < ApplicationController
 		@puzzle_id = params.require(:puzzle_id)
 		@puzzle = Puzzle.find(@puzzle_id)
 		@answer = Answer.find(params[:id])
+		@answer.end_time = Time.now()
+
+		#The start time for the riddle solving was stored in puzzle because we cannot store it in answer
+		@answer.completion_time = @answer.end_time - @puzzle.start_time
+		@answer.save
 
 		if check_answer(@answer, @puzzle)
 			@message = "Congratulations! Your answer is correct!"
@@ -50,42 +62,6 @@ class AnswersController < ApplicationController
 		#check each word in the array. If all the keywords were found in the user's answer, the answer is correct
 		def check_answer(answer, puzzle)
 
-			# arr = answer.text.downcase.split(' ')
-			# keyword_check = {}
-			# keywords = Keyword.where(puzzle_id: puzzle.id)
-
-			# #create a new hash that assigns each keyword as the key and value is initialized as false
-			# keywords.each do |x|
-			# 	keyword_check[x.text] = false
-			# end
-
-			# #if a keyword is found in the answer, it's value is set to true
-			# arr.each do |x|
-			# 	keywords.each do |y|
-			# 		byebug
-			# 		if x.eql? y.text or x.include? y.text then
-			# 			keyword_check[x] = true
-			# 		end
-			# 	end
-			# end
-			# # byebug
-
-			# #check if all the values in the hash are true
-			# all_values_true = true
-			# byebug
-			# keywords.each do |x|
-			# 	if keyword_check[x.text] == false
-			# 		all_values_true = false
-			# 	end
-			# end
-
-			# #if all the key values are true, all keywords have been matched
-			# if all_values_true == true
-			# 	return true
-			# else
-			# 	return false
-			# end
-
 
 			keywords = Keyword.where(puzzle_id: puzzle.id)
 			keyword_arr = []
@@ -94,7 +70,7 @@ class AnswersController < ApplicationController
 				keyword_arr.push(x.text)
 			end
 
-
+             
 			answer = answer.text
 			keyword_arr.all? {|word| answer.downcase.match(word) }
 

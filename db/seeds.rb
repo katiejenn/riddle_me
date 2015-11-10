@@ -33,6 +33,7 @@ u2 = User.create(email: 'john@ga.com', password: '1234', is_admin: false)
 u3 = User.create(email: 'sally@ga.com', password: '1234', is_admin: false)
 u4 = User.create(email: 'bob@ga.com', password: '1234', is_admin: false)
 u5 = User.create(email: 'billy@ga.com', password: '1234', is_admin: false)
+u6 = User.create(email: 'Guest User', password: '1234', is_admin: false)
 
 #seeding 'user-generated' answers
 a1 = Answer.create(text: 'A train', user_id: u2.id, puzzle_id: p1.id, accepted: false)

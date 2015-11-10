@@ -12,6 +12,8 @@
 <br>
 <b><%= @message %></b>
 <br>
+Score (measured in seconds): <%= @answer.completion_time %>
+<br>
 <% if !@answer_is_correct then %>
 <a href='javascript:history.back()'> <%= @options[0]%> </a><%= @options[1] %>
 <% end %>
